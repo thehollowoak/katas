@@ -8,11 +8,13 @@ public class BowlingFrameTest {
 
     private BowlingFrame frame;
     private BowlingFrame frameTwo;
+    private BowlingFrame frameThree;
 
     @Before
     public void before() {
         frame = null;
         frameTwo = null;
+        frameThree = null;
     }
 
     @Test
@@ -43,5 +45,15 @@ public class BowlingFrameTest {
         frame = new BowlingFrame("X", frameTwo);
 
         assertEquals(19, frame.score);
+    }
+
+    @Test
+    public void threeStrikesInARowIs30Points() {
+        BowlingFrame frameFour = new BowlingFrame("--", null);
+        frameThree = new BowlingFrame("X", frameFour);
+        frameTwo = new BowlingFrame("X", frameThree);
+        frame = new BowlingFrame("X", frameTwo);
+
+        assertEquals(30, frame.score);
     }
 }

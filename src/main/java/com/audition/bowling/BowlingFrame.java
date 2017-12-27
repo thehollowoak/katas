@@ -3,7 +3,7 @@ import java.util.*;
 
 public class BowlingFrame {
 
-    int score, bonusForSpare, bonusforStrike;
+    int score, bonusForSpare, bonusForStrike;
     private static final char SPARE = '/';
     private static final int SPARE_VALUE = 10;
     private static final char STRIKE = 'X';
@@ -29,17 +29,18 @@ public class BowlingFrame {
     public BowlingFrame(String input, BowlingFrame next) {
         char[] rolls = input.toCharArray();
         if (rolls[0] == STRIKE) {
-            score = STRIKE_VALUE + next.bonusforStrike;
+            score = STRIKE_VALUE + next.bonusForStrike;
+            bonusForStrike = STRIKE_VALUE + next.bonusForSpare;
         }
         else if (rolls[1] == SPARE) {
             score = SPARE_VALUE + next.bonusForSpare;
-            bonusforStrike = SPARE_VALUE;
+            bonusForStrike = SPARE_VALUE;
         }
         else {
             for (char roll : rolls) {
                 score += scoreMap.get(roll);
             }
-            bonusforStrike = score;
+            bonusForStrike = score;
         }
         bonusForSpare = scoreMap.get(rolls[0]);
     }
