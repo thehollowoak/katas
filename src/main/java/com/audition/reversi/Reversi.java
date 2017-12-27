@@ -31,7 +31,7 @@ public class Reversi {
     private void checkForMovesFromPoint(int i, int j) {
         if (board[i][j] == player) {
             for(Direction d : Direction.values()) {
-                if (board[i+d.getX()][j+d.getY()] == player.opponent()) {
+                if (getTokenOnBoardOrNull(i+d.getX(), j+d.getY()) == player.opponent()) {
                     checkForMoveInDirection(i+d.getX()*2, j+d.getY()*2, d);
                 }
             }
@@ -39,12 +39,19 @@ public class Reversi {
     }
 
     private void checkForMoveInDirection(int i, int j, Direction d) {
-        if (board[i][j] == player.opponent()) {
+        if (getTokenOnBoardOrNull(i, j) == player.opponent()) {
             checkForMoveInDirection(i+d.getX(), j+d.getY(), d);
         }
-        else if (board[i][j] == Token.EMPTY) {
+        else if (getTokenOnBoardOrNull(i, j) == Token.EMPTY) {
             board[i][j] = Token.LEGAL_MOVE;
         }
+    }
+
+    private Token getTokenOnBoardOrNull(int x, int y) {
+        if (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE) {
+            return board[x][y];
+        }
+        return null;
     }
 
     public String getBoardAsString() {

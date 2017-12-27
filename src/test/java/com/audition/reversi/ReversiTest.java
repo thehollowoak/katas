@@ -125,4 +125,23 @@ public class ReversiTest {
         assertEquals(multipleOpponentPiecesInRowWithMoves, reversi.getBoardAsString());
     }
 
+    private String piecesInCorner = 
+        "BBW....." +
+        "BW......" +
+        "........" +
+        "........" +
+        "........" +
+        "........" +
+        "........" +
+        "........" + "W";
+        
+    @Test
+    public void piecesInCornerDoesntGoOutOfBounds() {
+        reversi.setBoard(piecesInCorner);
+
+        reversi.getLegalMoves();
+
+        assertEquals(piecesInCorner, reversi.getBoardAsString());
+    }
+
 }
