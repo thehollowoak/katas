@@ -6,45 +6,45 @@ import static org.junit.Assert.*;
 
 public class BowlingFrameTest {
 
-    private BowlingFrame frame;
+    private BowlingFrame frameOne;
     private BowlingFrame frameTwo;
     private BowlingFrame frameThree;
 
     @Before
     public void before() {
-        frame = null;
+        frameOne = null;
         frameTwo = null;
         frameThree = null;
     }
 
     @Test
     public void singleFrameWithNumbersGivesProperScore() {
-        frame = new BowlingFrame("54", null);
+        frameOne = new BowlingFrame("54", null);
 
-        assertEquals(9, frame.score);
+        assertEquals(9, frameOne.score);
     }
 
     @Test
     public void singleFrameWithMissesGivesProperScore() {
-        frame = new BowlingFrame("-4", null);
+        frameOne = new BowlingFrame("-4", null);
 
-        assertEquals(4, frame.score);
+        assertEquals(4, frameOne.score);
     }
 
     @Test
     public void frameWithSpareGivesProperScore() {
         frameTwo = new BowlingFrame("45", null);
-        frame = new BowlingFrame("3/", frameTwo);
+        frameOne = new BowlingFrame("3/", frameTwo);
 
-        assertEquals(14, frame.score);
+        assertEquals(14, frameOne.score);
     }
 
     @Test
     public void frameWithStrikeGivesProperScore() {
         frameTwo = new BowlingFrame("45", null);
-        frame = new BowlingFrame("X", frameTwo);
+        frameOne = new BowlingFrame("X", frameTwo);
 
-        assertEquals(19, frame.score);
+        assertEquals(19, frameOne.score);
     }
 
     @Test
@@ -52,8 +52,26 @@ public class BowlingFrameTest {
         BowlingFrame frameFour = new BowlingFrame("--", null);
         frameThree = new BowlingFrame("X", frameFour);
         frameTwo = new BowlingFrame("X", frameThree);
-        frame = new BowlingFrame("X", frameTwo);
+        frameOne = new BowlingFrame("X", frameTwo);
 
-        assertEquals(30, frame.score);
+        assertEquals(30, frameOne.score);
+    }
+
+    @Test
+    public void spareThenStrikeIs20Points() {
+        frameThree = new BowlingFrame("--", null);
+        frameTwo = new BowlingFrame("X", frameThree);
+        frameOne = new BowlingFrame("9/", frameTwo);
+
+        assertEquals(20, frameOne.score);
+    }
+
+    @Test
+    public void strikeThenSpareIs20Points() {
+        frameThree = new BowlingFrame("--", null);
+        frameTwo = new BowlingFrame("9/", frameThree);
+        frameOne = new BowlingFrame("X", frameTwo);
+
+        assertEquals(20, frameOne.score);
     }
 }

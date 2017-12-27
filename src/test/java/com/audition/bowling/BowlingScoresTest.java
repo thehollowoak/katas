@@ -13,4 +13,12 @@ public class BowlingScoresTest {
         bowling = new BowlingScores();
     }
 
+    @Test
+    public void scoreGameWithOnlyNumbers() {
+        bowling.setFrames("11 22 33 44 14 23 32 41 24 31");
+
+        int score = bowling.getScore();
+
+        assertEquals(50, score);
+    }
 }
