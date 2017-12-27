@@ -8,6 +8,10 @@ public enum Token {
         symbol = c;
     }
 
+    public char getSymbol() {
+        return symbol;
+    }
+
     public static Token getToken(char symbol) {
         for(Token token : Token.values()) {
             if(token.symbol == symbol) {
