@@ -4,6 +4,9 @@ import java.util.*;
 public class BowlingFrame {
 
     int score;
+    int bonusForSpare;
+    private static final char SPARE = '/';
+    private static final int SPARE_VALUE = 10;
     private static final HashMap<Character, Integer> scoreMap;
     static
     {
@@ -18,13 +21,20 @@ public class BowlingFrame {
         scoreMap.put('7', 7);
         scoreMap.put('8', 8);
         scoreMap.put('9', 9);
+        scoreMap.put('/', SPARE_VALUE);
     }
 
-    public BowlingFrame(String input) {
+    public BowlingFrame(String input, BowlingFrame next) {
         char[] rolls = input.toCharArray();
-        for (char roll : rolls) {
-            score += scoreMap.get(roll);
+        if (rolls[1] == SPARE) {
+            score = SPARE_VALUE + next.bonusForSpare;
         }
+        else {
+            for (char roll : rolls) {
+                score += scoreMap.get(roll);
+            }
+        }
+        bonusForSpare = scoreMap.get(rolls[0]);
     }
 
 }
