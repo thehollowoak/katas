@@ -19,4 +19,11 @@ public class BowlingFrameTest {
 
         assertEquals(9, frame.score);
     }
+
+    @Test
+    public void singleFrameWithMissesGivesProperScore() {
+        frame = new BowlingFrame("-4");
+
+        assertEquals(4, frame.score);
+    }
 }
