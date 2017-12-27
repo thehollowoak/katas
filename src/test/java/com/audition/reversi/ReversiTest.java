@@ -143,5 +143,35 @@ public class ReversiTest {
 
         assertEquals(piecesInCorner, reversi.getBoardAsString());
     }
+    
+    // board taken from below image which shows all legal options
+    // https://lh3.ggpht.com/FKh-YJNP_61f_Iv0WS0VvlxZpWZuNgXnKdsL-nUik9GxJRCJjTQ15cSUKsMRmdYhd_E=h900
+    private String complicatedSetup = 
+        "W..WB.B." +
+        ".WWWBB.." +
+        "BWWWBBBB" +
+        ".W.BW.B." +
+        "..WWBW.." +
+        "...W.B.." +
+        "..W...B." +
+        ".......B" + "B";
+    private String complicatedSetupWithMoves = 
+        "W.OWB.B." +
+        "OWWWBB.." +
+        "BWWWBBBB" +
+        ".WOBWOB." +
+        "OOWWBWO." +
+        ".OOWOB.." +
+        "..WOO.B." +
+        ".O.....B" + "B";
+        
+    @Test
+    public void complicatedSetup() {
+        reversi.setBoard(complicatedSetup);
+
+        reversi.getLegalMoves();
+
+        assertEquals(complicatedSetupWithMoves, reversi.getBoardAsString());
+    }
 
 }
