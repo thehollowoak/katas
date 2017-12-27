@@ -32,9 +32,18 @@ public class Reversi {
         if (board[i][j] == player) {
             for(Direction d : Direction.values()) {
                 if (board[i+d.getX()][j+d.getY()] == player.opponent()) {
-                    board[i+d.getX()*2][j+d.getY()*2] = Token.LEGAL_MOVE;
+                    checkForMoveInDirection(i+d.getX()*2, j+d.getY()*2, d);
                 }
             }
+        }
+    }
+
+    private void checkForMoveInDirection(int i, int j, Direction d) {
+        if (board[i][j] == player.opponent()) {
+            checkForMoveInDirection(i+d.getX(), j+d.getY(), d);
+        }
+        else if (board[i][j] == Token.EMPTY) {
+            board[i][j] = Token.LEGAL_MOVE;
         }
     }
 

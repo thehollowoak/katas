@@ -97,4 +97,32 @@ public class ReversiTest {
         assertEquals(fourPiecesOnBoardWithMoves, reversi.getBoardAsString());
     }
 
+    private String multipleOpponentPiecesInRow = 
+        "........" +
+        "...B...." +
+        "...B...." +
+        "...B...." +
+        "...WBB.." +
+        "........" +
+        "........" +
+        "........" + "W";
+    private String multipleOpponentPiecesInRowWithMoves = 
+        "...O...." +
+        "...B...." +
+        "...B...." +
+        "...B...." +
+        "...WBBO." +
+        "........" +
+        "........" +
+        "........" + "W";
+        
+    @Test
+    public void multipleOpponentPiecesInRowStillGivesLegalMoves() {
+        reversi.setBoard(multipleOpponentPiecesInRow);
+
+        reversi.getLegalMoves();
+
+        assertEquals(multipleOpponentPiecesInRowWithMoves, reversi.getBoardAsString());
+    }
+
 }
