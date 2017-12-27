@@ -24,7 +24,13 @@ public class Reversi {
         for(int i = 0; i < BOARD_SIZE; i++) {
             for(int j = 0; j < BOARD_SIZE; j++) {
                 if (board[i][j] == player) {
-                    board[i+2][j] = Token.LEGAL_MOVE;
+                    for(int a = -1; a < 2; a++) {
+                        for(int b = -1; b < 2; b++) {
+                            if (board[i+a][j+b] == player.opponent()) {
+                                board[i+a*2][j+b*2] = Token.LEGAL_MOVE;
+                            }
+                        }
+                    }
                 }
             }
         }

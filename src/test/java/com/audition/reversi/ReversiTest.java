@@ -13,15 +13,6 @@ public class ReversiTest {
         reversi = new Reversi();
     }
 
-    @Test
-    public void twoPiecesOnBoardGivesOneOption() {
-        reversi.setBoard(twoPiecesOnBoard);
-
-        reversi.getLegalMoves();
-
-        assertEquals(twoPiecesOnBoardWithMoves, reversi.getBoardAsString());
-    }
-
     private String twoPiecesOnBoard = 
         "........" +
         "........" +
@@ -40,5 +31,42 @@ public class ReversiTest {
         "...O...." +
         "........" +
         "........" + "B";
+
+    @Test
+    public void twoPiecesOnBoardGivesOneOption() {
+        reversi.setBoard(twoPiecesOnBoard);
+
+        reversi.getLegalMoves();
+
+        assertEquals(twoPiecesOnBoardWithMoves, reversi.getBoardAsString());
+    }
+
+    private String threePiecesOnBoard = 
+        "........" +
+        "........" +
+        "........" +
+        "...B...." +
+        "...WB..." +
+        "........" +
+        "........" +
+        "........" + "W";
+    private String threePiecesOnBoardWithMoves = 
+        "........" +
+        "........" +
+        "...O...." +
+        "...B...." +
+        "...WBO.." +
+        "........" +
+        "........" +
+        "........" + "W";
+        
+    @Test
+    public void threePiecesOnBoardGivesTwoOptions() {
+        reversi.setBoard(threePiecesOnBoard);
+
+        reversi.getLegalMoves();
+
+        assertEquals(threePiecesOnBoardWithMoves, reversi.getBoardAsString());
+    }
 
 }

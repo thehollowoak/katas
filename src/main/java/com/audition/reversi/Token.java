@@ -12,6 +12,14 @@ public enum Token {
         return symbol;
     }
 
+    public Token opponent() {
+        switch (this) {
+            case WHITE: return BLACK;
+            case BLACK: return WHITE;
+            default: return null;
+        }
+    }
+
     public static Token getToken(char symbol) {
         for(Token token : Token.values()) {
             if(token.symbol == symbol) {
