@@ -55,7 +55,7 @@ public class BowlingFrame {
             for (char roll : rolls) {
                 score += scoreMap.get(roll);
             }
-            bonusForStrike = score;
+            bonusForStrike = scoreMap.get(rolls[0]) + scoreMap.get(rolls[1]);
         }
         bonusForSpare = scoreMap.get(rolls[0]);
     }

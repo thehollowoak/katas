@@ -39,4 +39,13 @@ public class BowlingScoresTest {
 
         assertEquals(150, score);
     }
+
+    @Test
+    public void scoreGameWithStrikes() {
+        bowling.setFrames("X X X X X X X X X X X X");
+
+        int score = bowling.getScore();
+
+        assertEquals(300, score);
+    }
 }

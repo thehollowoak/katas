@@ -81,4 +81,11 @@ public class BowlingFrameTest {
 
         assertEquals(15, frameOne.score);
     }
+
+    @Test
+    public void endFrameWithStrike() {
+        frameOne = new BowlingFrame("X15");
+
+        assertEquals(16, frameOne.score);
+    }
 }
