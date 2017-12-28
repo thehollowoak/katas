@@ -65,6 +65,17 @@ public class PacmanGameTest {
         assertEquals(posInFrontOfWall, game.getPosition());
     }
 
+    @Test
+    public void pacmanWrapsAround() {
+        game.rotate(RIGHT);
+        Point startingPos = game.getPosition();
+        game.tick();
+        
+        moveUntilPacmanGetsToPoint(startingPos);
+
+        assertEquals(startingPos, game.getPosition());
+    }
+
     private void moveUntilWall() {
         Point nextPos = game.getPosition();
         nextPos.translate(game.getDirection());
@@ -72,6 +83,13 @@ public class PacmanGameTest {
         while (game.getIconAtPoint(nextPos) != Icon.WALL && noInfinateLoops++ < 20) {
             game.tick();
             nextPos.translate(game.getDirection());
+        }
+    }
+
+    private void moveUntilPacmanGetsToPoint(Point stoppingPoint) {
+        int noInfinateLoops = 0;
+        while (game.getPosition().getY() != stoppingPoint.getY() && noInfinateLoops++ < 20) {
+            game.tick();
         }
     }
 }

@@ -20,6 +20,12 @@ public class PacmanGame {
 
         void move() {
             position.translate(direction);
+            if (position.getY() < 0) {
+                position = new Point(position.getX(), position.getY() + BOARD_WIDTH);
+            }
+            else if (position.getY() >= BOARD_WIDTH) {
+                position = new Point(position.getX(), position.getY() - BOARD_WIDTH);
+            }
         }
     }
 
@@ -52,7 +58,14 @@ public class PacmanGame {
     }
 
     public Icon getIconAtPoint(Point p) {
-        return board[p.getX()][p.getY()];
+        if (isPointOnBoard(p)) {
+            return board[p.getX()][p.getY()];
+        }
+        return null;
+    }
+
+    private boolean isPointOnBoard(Point p) {
+        return p.getX() >= 0 && p.getX() < BOARD_HIGHT && p.getY() >= 0 && p.getY() < BOARD_WIDTH; 
     }
 
     private void setIconAtPoint(Point p, Icon i) {
