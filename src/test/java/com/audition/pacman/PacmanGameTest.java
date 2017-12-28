@@ -5,6 +5,7 @@ import org.junit.Before;
 import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
+import static com.audition.pacman.Direction.*;
 
 public class PacmanGameTest {
 
@@ -21,5 +22,12 @@ public class PacmanGameTest {
 
         assert(boardRowWithPacman.contains(Icon.PACMAN));
         assert(boardRowWithPacman.contains(Icon.DOT));
+    }
+
+    @Test
+    public void pacmanCanBeRotated() {
+        game.rotate(UP);
+
+        assertEquals(UP, game.getDirection());
     }
 }
