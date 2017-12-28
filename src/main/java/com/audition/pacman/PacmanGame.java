@@ -30,9 +30,13 @@ public class PacmanGame {
     }
 
     public void tick() {
-        setIconAtPoint(pacman.position, EMPTY);
-        pacman.move();
-        setIconAtPoint(pacman.position, PACMAN);
+        Point next = getPosition();
+        next.translate(pacman.direction);
+        if (getIconAtPoint(next) != WALL) {
+            setIconAtPoint(pacman.position, EMPTY);
+            pacman.move();
+            setIconAtPoint(pacman.position, PACMAN);
+        }
     }
 
     public void rotate(Direction d) {

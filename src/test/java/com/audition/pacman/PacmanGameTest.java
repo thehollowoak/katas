@@ -53,4 +53,25 @@ public class PacmanGameTest {
 
         assertNotSame("There is not a dot", Icon.DOT, game.getIconAtPoint(dotPos));
     }
+
+    @Test
+    public void pacmanStopsOnWall() {
+        game.rotate(UP);
+        
+        moveUntilWall();
+        Point posInFrontOfWall = game.getPosition();
+        game.tick();
+
+        assertEquals(posInFrontOfWall, game.getPosition());
+    }
+
+    private void moveUntilWall() {
+        Point nextPos = game.getPosition();
+        nextPos.translate(game.getDirection());
+        int noInfinateLoops = 0;
+        while (game.getIconAtPoint(nextPos) != Icon.WALL && noInfinateLoops++ < 20) {
+            game.tick();
+            nextPos.translate(game.getDirection());
+        }
+    }
 }
