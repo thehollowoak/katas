@@ -29,35 +29,51 @@ public class BowlingFrame {
     public BowlingFrame(String input, BowlingFrame next) {
         char[] rolls = input.toCharArray();
         if (rolls[0] == STRIKE) {
-            score = STRIKE_VALUE + next.bonusForStrike;
-            bonusForStrike = STRIKE_VALUE + next.bonusForSpare;
+            scoreStrike(next.bonusForSpare, next.bonusForStrike);
         }
         else if (rolls[1] == SPARE) {
-            score = SPARE_VALUE + next.bonusForSpare;
-            bonusForStrike = SPARE_VALUE;
+            scoreSpare(next.bonusForSpare);
         }
         else {
-            for (char roll : rolls) {
-                score += scoreMap.get(roll);
-            }
-            bonusForStrike = score;
+            scoreNumbers(rolls);
         }
         bonusForSpare = scoreMap.get(rolls[0]);
     }
 
     public BowlingFrame(String endFrameInput) {
         char[] rolls = endFrameInput.toCharArray();
-        if (rolls[1] == SPARE) {
-            score = SPARE_VALUE + scoreMap.get(rolls[2]);
-            bonusForStrike = SPARE_VALUE;
+        if (rolls[0] == STRIKE) {
+            if (rolls[2] == SPARE) {
+                scoreStrike(scoreMap.get(rolls[1]), scoreMap.get(rolls[2]));
+            }
+            else {
+                scoreStrike(scoreMap.get(rolls[1]), scoreMap.get(rolls[1]) + scoreMap.get(rolls[2]));
+            }
+        }
+        else if (rolls[1] == SPARE) {
+            scoreSpare(scoreMap.get(rolls[2]));
         }
         else {
-            for (char roll : rolls) {
-                score += scoreMap.get(roll);
-            }
-            bonusForStrike = scoreMap.get(rolls[0]) + scoreMap.get(rolls[1]);
+            scoreNumbers(rolls);
         }
         bonusForSpare = scoreMap.get(rolls[0]);
+    }
+
+    private void scoreStrike(int singleBonus, int doubleBonus) {
+        score = STRIKE_VALUE + doubleBonus;
+        bonusForStrike = STRIKE_VALUE + singleBonus;
+    }
+
+    private void scoreSpare(int singleBonus) {
+        score = SPARE_VALUE + singleBonus;
+        bonusForStrike = SPARE_VALUE;
+    }
+
+    private void scoreNumbers(char[] rolls) {
+        for (char roll : rolls) {
+            score += scoreMap.get(roll);
+        }
+        bonusForStrike = score;
     }
 
 }
