@@ -8,13 +8,14 @@ public class PacmanGame {
     public static final int BOARD_HIGHT = 20;
     public static final int BOARD_WIDTH = 15;
     Icon[][] board;
-    Pacman pacman;
+    PacmanOrGhost pacman;
+    PacmanOrGhost blinky;
 
-    private class Pacman {
+    private class PacmanOrGhost {
         Point position;
         Direction direction;
-        Pacman() {
-            position = new Point(BOARD_HIGHT/2, BOARD_WIDTH/2);
+        PacmanOrGhost(Point position) {
+            this.position = position;
             direction = RIGHT;
         }
 
@@ -31,7 +32,8 @@ public class PacmanGame {
 
     public PacmanGame() {
         board = new Icon[BOARD_HIGHT][BOARD_WIDTH];
-        pacman = new Pacman();
+        pacman = new PacmanOrGhost(new Point(BOARD_HIGHT/2, BOARD_WIDTH/2));
+        blinky = new PacmanOrGhost(new Point(1,1));
         fillBoard();
     }
 
@@ -79,5 +81,6 @@ public class PacmanGame {
         Arrays.fill(board[0], WALL);
         Arrays.fill(board[BOARD_HIGHT-1], WALL);
         board[pacman.position.getX()][pacman.position.getY()] = PACMAN;
+        board[blinky.position.getX()][blinky.position.getY()] = GHOST;
     }
 }

@@ -76,6 +76,13 @@ public class PacmanGameTest {
         assertEquals(startingPos, game.getPosition());
     }
 
+    @Test
+    public void thereAreGhosts() {
+        List <Icon> boardRowWithGhosts = Arrays.asList(game.board[1]);
+
+        assert(boardRowWithGhosts.contains(Icon.GHOST));
+    }
+
     private void moveUntilWall() {
         Point nextPos = game.getPosition();
         nextPos.translate(game.getDirection());
