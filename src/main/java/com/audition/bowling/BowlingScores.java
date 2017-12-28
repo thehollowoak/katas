@@ -7,9 +7,9 @@ public class BowlingScores {
     public void setFrames(String input) {
         String[] rolls = input.split(" ");
         frames = new BowlingFrame[rolls.length];
-        BowlingFrame next = null;
-        for(int i = 9; i >= 0; i--) {
-            frames[i] = new BowlingFrame(rolls[i], next);
+        frames[9] = new BowlingFrame(rolls[9]);
+        for(int i = 8; i >= 0; i--) {
+            frames[i] = new BowlingFrame(rolls[i], frames[i+1]);
         }
     }
 

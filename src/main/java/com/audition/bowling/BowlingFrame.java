@@ -45,4 +45,19 @@ public class BowlingFrame {
         bonusForSpare = scoreMap.get(rolls[0]);
     }
 
+    public BowlingFrame(String endFrameInput) {
+        char[] rolls = endFrameInput.toCharArray();
+        if (rolls[1] == SPARE) {
+            score = SPARE_VALUE + scoreMap.get(rolls[2]);
+            bonusForStrike = SPARE_VALUE;
+        }
+        else {
+            for (char roll : rolls) {
+                score += scoreMap.get(roll);
+            }
+            bonusForStrike = score;
+        }
+        bonusForSpare = scoreMap.get(rolls[0]);
+    }
+
 }

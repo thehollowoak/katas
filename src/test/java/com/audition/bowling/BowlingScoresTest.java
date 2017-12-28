@@ -21,4 +21,22 @@ public class BowlingScoresTest {
 
         assertEquals(50, score);
     }
+
+    @Test
+    public void scoreGameWithMisses() {
+        bowling.setFrames("9- 9- 9- 9- 9- 9- 9- 9- 9- 9-");
+
+        int score = bowling.getScore();
+
+        assertEquals(90, score);
+    }
+
+    @Test
+    public void scoreGameWithSpares() {
+        bowling.setFrames("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5");
+
+        int score = bowling.getScore();
+
+        assertEquals(150, score);
+    }
 }
