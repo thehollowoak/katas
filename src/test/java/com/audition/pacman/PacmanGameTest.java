@@ -5,6 +5,7 @@ import org.junit.Before;
 import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
+import static com.audition.pacman.Icon.*;
 import static com.audition.pacman.Direction.*;
 
 public class PacmanGameTest {
@@ -20,8 +21,8 @@ public class PacmanGameTest {
     public void pacmanIsOnAGridFilledWithDots() {
         List <Icon> boardRowWithPacman = Arrays.asList(game.board[game.BOARD_HIGHT/2]);
 
-        assert(boardRowWithPacman.contains(Icon.PACMAN));
-        assert(boardRowWithPacman.contains(Icon.DOT));
+        assert(boardRowWithPacman.contains(PACMAN));
+        assert(boardRowWithPacman.contains(DOT));
     }
 
     @Test
@@ -46,12 +47,12 @@ public class PacmanGameTest {
         game.rotate(RIGHT);
         Point dotPos = game.getPosition();
         dotPos.translate(RIGHT);
-        assertEquals("There is a dot", Icon.DOT, game.getIconAtPoint(dotPos));
+        assertEquals("There is a dot", DOT, game.getIconAtPoint(dotPos));
 
         game.tick();
         game.tick();
 
-        assertNotSame("There is not a dot", Icon.DOT, game.getIconAtPoint(dotPos));
+        assertNotSame("There is not a dot", DOT, game.getIconAtPoint(dotPos));
     }
 
     @Test
@@ -80,14 +81,24 @@ public class PacmanGameTest {
     public void thereAreGhosts() {
         List <Icon> boardRowWithGhosts = Arrays.asList(game.board[1]);
 
-        assert(boardRowWithGhosts.contains(Icon.GHOST));
+        assert(boardRowWithGhosts.contains(GHOST));
+    }
+
+    @Test
+    public void ghostMovesOnTick() {
+        Point ghostStartingPoint = new Point(1,1);
+        assertEquals(GHOST, game.getIconAtPoint(ghostStartingPoint));
+
+        game.tick();
+
+        assertNotSame(GHOST, game.getIconAtPoint(ghostStartingPoint));        
     }
 
     private void moveUntilWall() {
         Point nextPos = game.getPosition();
         nextPos.translate(game.getDirection());
         int noInfinateLoops = 0;
-        while (game.getIconAtPoint(nextPos) != Icon.WALL && noInfinateLoops++ < 20) {
+        while (game.getIconAtPoint(nextPos) != WALL && noInfinateLoops++ < 20) {
             game.tick();
             nextPos.translate(game.getDirection());
         }

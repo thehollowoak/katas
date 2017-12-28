@@ -14,7 +14,9 @@ public class PacmanGame {
     private class PacmanOrGhost {
         Point position;
         Direction direction;
-        PacmanOrGhost(Point position) {
+        Icon icon;
+        PacmanOrGhost(Icon icon, Point position) {
+            this.icon = icon;
             this.position = position;
             direction = RIGHT;
         }
@@ -32,18 +34,23 @@ public class PacmanGame {
 
     public PacmanGame() {
         board = new Icon[BOARD_HIGHT][BOARD_WIDTH];
-        pacman = new PacmanOrGhost(new Point(BOARD_HIGHT/2, BOARD_WIDTH/2));
-        blinky = new PacmanOrGhost(new Point(1,1));
+        pacman = new PacmanOrGhost(PACMAN, new Point(BOARD_HIGHT/2, BOARD_WIDTH/2));
+        blinky = new PacmanOrGhost(GHOST, new Point(1,1));
         fillBoard();
     }
 
     public void tick() {
+        moveCreature(pacman);
+        moveCreature(blinky);
+    }
+
+    private void moveCreature(PacmanOrGhost creature) {
         Point next = getPosition();
-        next.translate(pacman.direction);
+        next.translate(creature.direction);
         if (getIconAtPoint(next) != WALL) {
-            setIconAtPoint(pacman.position, EMPTY);
-            pacman.move();
-            setIconAtPoint(pacman.position, PACMAN);
+            setIconAtPoint(creature.position, EMPTY);
+            creature.move();
+            setIconAtPoint(creature.position, PACMAN);
         }
     }
 
@@ -80,7 +87,7 @@ public class PacmanGame {
         }
         Arrays.fill(board[0], WALL);
         Arrays.fill(board[BOARD_HIGHT-1], WALL);
-        board[pacman.position.getX()][pacman.position.getY()] = PACMAN;
-        board[blinky.position.getX()][blinky.position.getY()] = GHOST;
+        board[pacman.position.getX()][pacman.position.getY()] = pacman.icon;
+        board[blinky.position.getX()][blinky.position.getY()] = blinky.icon;
     }
 }
