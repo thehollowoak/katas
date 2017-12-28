@@ -40,4 +40,17 @@ public class PacmanGameTest {
 
         assertNotSame(startingPos, endingPos);
     }
+
+    @Test
+    public void pacmanEatsDots() {
+        game.rotate(RIGHT);
+        Point dotPos = game.getPosition();
+        dotPos.translate(RIGHT);
+        assertEquals("There is a dot", Icon.DOT, game.getIconAtPoint(dotPos));
+
+        game.tick();
+        game.tick();
+
+        assertNotSame("There is not a dot", Icon.DOT, game.getIconAtPoint(dotPos));
+    }
 }

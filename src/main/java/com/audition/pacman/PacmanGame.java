@@ -30,7 +30,9 @@ public class PacmanGame {
     }
 
     public void tick() {
+        setIconAtPoint(pacman.position, EMPTY);
         pacman.move();
+        setIconAtPoint(pacman.position, PACMAN);
     }
 
     public void rotate(Direction d) {
@@ -43,6 +45,14 @@ public class PacmanGame {
 
     public Point getPosition() {
         return new Point(pacman.position);
+    }
+
+    public Icon getIconAtPoint(Point p) {
+        return board[p.getX()][p.getY()];
+    }
+
+    private void setIconAtPoint(Point p, Icon i) {
+        board[p.getX()][p.getY()] = i;
     }
 
     private void fillBoard() {
