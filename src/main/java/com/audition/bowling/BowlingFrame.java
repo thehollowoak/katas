@@ -1,5 +1,5 @@
 package com.audition.bowling;
-import java.util.*;
+import java.util.HashMap;
 
 public class BowlingFrame {
 
@@ -44,7 +44,7 @@ public class BowlingFrame {
         char[] rolls = endFrameInput.toCharArray();
         if (rolls[0] == STRIKE) {
             if (rolls[2] == SPARE) {
-                scoreStrike(scoreMap.get(rolls[1]), scoreMap.get(rolls[2]));
+                scoreStrike(scoreMap.get(rolls[1]), SPARE_VALUE);
             }
             else {
                 scoreStrike(scoreMap.get(rolls[1]), scoreMap.get(rolls[1]) + scoreMap.get(rolls[2]));
