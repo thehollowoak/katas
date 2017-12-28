@@ -1,5 +1,6 @@
 package com.audition.pacman;
 import java.util.Arrays;
+import java.lang.Math;
 import static com.audition.pacman.Icon.*;
 import static com.audition.pacman.Direction.*;
 
@@ -41,6 +42,7 @@ public class PacmanGame {
 
     public void tick() {
         moveCreature(pacman);
+        rotateGhost(blinky);
         moveCreature(blinky);
     }
 
@@ -50,7 +52,18 @@ public class PacmanGame {
         if (getIconAtPoint(next) != WALL) {
             setIconAtPoint(creature.position, EMPTY);
             creature.move();
-            setIconAtPoint(creature.position, PACMAN);
+            setIconAtPoint(creature.position, creature.icon);
+        }
+    }
+
+    private void rotateGhost(PacmanOrGhost ghost) {
+        int dx = ghost.position.getX() - pacman.position.getX();
+        int dy = ghost.position.getY() - pacman.position.getY();
+        if (Math.abs(dx) > Math.abs(dy)) {
+            ghost.direction = (dx > 0) ? UP : DOWN;
+        }
+        else {
+            ghost.direction = (dy > 0) ? LEFT : RIGHT;
         }
     }
 

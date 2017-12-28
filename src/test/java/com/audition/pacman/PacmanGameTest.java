@@ -94,6 +94,16 @@ public class PacmanGameTest {
         assertNotSame(GHOST, game.getIconAtPoint(ghostStartingPoint));        
     }
 
+    @Test
+    public void ghostMovesTowardPacman() {
+        Point pointBelowGhost = new Point(2,1);
+        game.rotate(LEFT);
+
+        game.tick();
+
+        assertEquals(GHOST, game.getIconAtPoint(pointBelowGhost));        
+    }
+
     private void moveUntilWall() {
         Point nextPos = game.getPosition();
         nextPos.translate(game.getDirection());
