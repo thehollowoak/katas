@@ -11,12 +11,15 @@ public class PacmanGame {
     Pacman pacman;
 
     private class Pacman {
-        int x, y;
+        Point position;
         Direction direction;
         Pacman() {
-            x = BOARD_HIGHT/2;
-            y = BOARD_WIDTH/2;
+            position = new Point(BOARD_HIGHT/2, BOARD_WIDTH/2);
             direction = RIGHT;
+        }
+
+        void move() {
+            position.translate(direction);
         }
     }
 
@@ -24,6 +27,10 @@ public class PacmanGame {
         board = new Icon[BOARD_HIGHT][BOARD_WIDTH];
         pacman = new Pacman();
         fillBoard();
+    }
+
+    public void tick() {
+        pacman.move();
     }
 
     public void rotate(Direction d) {
@@ -34,12 +41,16 @@ public class PacmanGame {
         return pacman.direction;
     }
 
+    public Point getPosition() {
+        return new Point(pacman.position);
+    }
+
     private void fillBoard() {
         for(Icon[] row : board) {
             Arrays.fill(row, DOT);
         }
         Arrays.fill(board[0], WALL);
         Arrays.fill(board[BOARD_HIGHT-1], WALL);
-        board[pacman.x][pacman.y] = PACMAN;
+        board[pacman.position.getX()][pacman.position.getY()] = PACMAN;
     }
 }

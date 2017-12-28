@@ -30,4 +30,14 @@ public class PacmanGameTest {
 
         assertEquals(UP, game.getDirection());
     }
+
+    @Test
+    public void pacmanMovesOnTick() {
+        game.rotate(UP);
+        Point startingPos = game.getPosition();
+        game.tick();
+        Point endingPos = game.getPosition();
+
+        assertNotSame(startingPos, endingPos);
+    }
 }
